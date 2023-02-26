@@ -30,7 +30,7 @@ void Femto::loadSettings(){
     QFont font = qvariant_cast<QFont>(settings.value("font", QFont(QFont("Monospace", 10))));
     ui->textEdit->setFont(font);
     ui->textEdit->changecolors();
-    this->setStyleSheet("background-color: " + bgcolor.name() + "; color: " + color.name() + ";");
+    ui->textEdit->setStyleSheet("background-color: " + bgcolor.name() + "; color: " + color.name() + ";");
     settings.endGroup();
 }
 
