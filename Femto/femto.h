@@ -66,8 +66,11 @@ private slots:
 
     void on_actionPreferences_triggered();
 
+    void on_actionFullscreen_triggered();
+
 private:
     Ui::Femto *ui;
     QString currentFile = "";
+    bool fullScreen = true;
 };
 #endif // FEMTO_H

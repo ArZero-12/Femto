@@ -40,6 +40,7 @@ private slots:
 
 private:
     QWidget *lineNumberArea;
+
 };
 
 //![codeeditordefinition]

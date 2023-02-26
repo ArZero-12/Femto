@@ -14,7 +14,6 @@ Femto::Femto(QWidget *parent)
     highlighter->setDocument(ui->textEdit->document());
     ui->textEdit->setTabStopDistance(metrics.horizontalAdvance(' ') * 4);
     loadSettings();
-
     if (QApplication::arguments().size() > 1) {
         const QString fileName = QApplication::arguments().at(1);
         readFile(fileName, 1);
@@ -207,3 +206,15 @@ void Femto::on_actionPreferences_triggered()
     loadSettings();
 }
 
+
+void Femto::on_actionFullscreen_triggered()
+{
+
+    if (fullScreen){
+        this->setWindowState(Qt::WindowFullScreen);
+        fullScreen = false;
+        return;
+    }
+    this->setWindowState(Qt::WindowMaximized);
+    fullScreen = true;
+}
