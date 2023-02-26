@@ -35,6 +35,7 @@ private:
     QRegexpHighlighter* highlighter;
     QMimeDatabase db;
     QMimeType getMimeType(QString fileName);
+    void loadSettings();
 private slots:
     void on_actionNew_triggered();
 
@@ -61,11 +62,8 @@ private slots:
     void on_textEdit_textChanged();
 
     //void on_textEdit_currentCharFormatChanged(const QTextCharFormat &format);
-    void saveSettings(QFont font);
 
-    void loadSettings();
 
-    void on_actionChange_Font_triggered();
 
     void on_actionPreferences_triggered();
 

@@ -24,10 +24,10 @@ Femto::Femto(QWidget *parent)
 
 void Femto::loadSettings(){
     QSettings settings("ArZero", "Femto");
-    settings.beginGroup("Font");
-    QColor color = qvariant_cast<QColor>(settings.value("color"));
-    QColor bgcolor = qvariant_cast<QColor>(settings.value("bgcolor"));
-    QFont font = qvariant_cast<QFont>(settings.value("font"));
+    settings.beginGroup("Style");
+    QColor color = qvariant_cast<QColor>(settings.value("color", QColor::fromRgb(255, 255, 255)));
+    QColor bgcolor = qvariant_cast<QColor>(settings.value("bgcolor", QColor::fromRgb(14, 12, 19)));
+    QFont font = qvariant_cast<QFont>(settings.value("font", QFont(QFont("Monospace", 10))));
     ui->textEdit->setFont(font);
     ui->textEdit->changecolors();
     this->setStyleSheet("background-color: " + bgcolor.name() + "; color: " + color.name() + ";");
@@ -41,8 +41,6 @@ Femto::~Femto()
 
 void Femto::readFile(QString fileName, int argument){
     QMimeType type = getMimeType(fileName);
-    //qDebug() << "Mime type:" << type.name();
-    //ui->textEdit->setText(type.name());
     delete highlighter;
     QFileInfo check_file(fileName);
     if ((!check_file.exists()) && (argument == 0)){
@@ -72,7 +70,6 @@ void Femto::readFile(QString fileName, int argument){
     highlighter = new QRegexpHighlighter(this, type.name());
     highlighter->setDocument(ui->textEdit->document());
 
-    //currentFile = fileName;
     file.close();
 }
 void Femto::on_actionNew_triggered()
@@ -85,7 +82,6 @@ void Femto::on_actionNew_triggered()
 void Femto::on_actionOpen_triggered()
 {
     QString fileName = QFileDialog::getOpenFileName(this, "Select file: ");
-    //std::cout << fileName.toStdString();
     readFile(fileName, 0);
     setWindowTitle(fileName);
 }
@@ -110,13 +106,6 @@ void Femto::on_actionSave_triggered()
     QString text = ui->textEdit->toPlainText();
     out << text;
     file.close();
-
-    /*
-    delete highlighter;
-    QMimeType type = db.mimeTypeForFile(fileName);
-    highlighter = new QRegexpHighlighter(this, type.name());
-    highlighter->setDocument(ui->textEdit->document());
-    */
 
     setWindowTitle(fileName);
 }
@@ -206,28 +195,6 @@ void Femto::on_textEdit_textChanged()
 
 QMimeType Femto::getMimeType(QString fileName){
     return db.mimeTypeForFile(fileName);
-}
-
-void Femto::saveSettings(QFont font){
-    QSettings setting("ArZero", "Femto");
-    setting.beginGroup("Font");
-    setting.setValue("font", font);
-    setting.endGroup();
-}
-
-void Femto::on_actionChange_Font_triggered()
-{
-    bool ok;
-    QFont font = QFontDialog::getFont(&ok, QFont("Monospace", 10), this);
-    if (ok){
-        ui->textEdit->setFont(font);
-        saveSettings(font);
-
-        return;
-    }
-    QMessageBox::warning(this, "Warning", "Cannot set font!");
-
-
 }
 
 

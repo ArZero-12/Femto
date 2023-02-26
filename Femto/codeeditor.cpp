@@ -142,9 +142,9 @@ void CodeEditor::changecolors(){
     //sdc = side;
     //sdfc = sidefg;
     QSettings settings("ArZero", "Femto");
-    settings.beginGroup("Font");
-    lnc = qvariant_cast<QColor>(settings.value("lncolor"));
-    sdfc = qvariant_cast<QColor>(settings.value("sideforecolor"));
-    sdc = qvariant_cast<QColor>(settings.value("sidecolor"));
+    settings.beginGroup("Style");
+    lnc = qvariant_cast<QColor>(settings.value("lncolor", QColor::fromRgb(139, 0, 139)));
+    sdfc = qvariant_cast<QColor>(settings.value("sideforecolor", QColor::fromRgb(255, 255, 255)));
+    sdc = qvariant_cast<QColor>(settings.value("sidecolor", QColor::fromRgb(120, 0, 255)));
     settings.endGroup();
 }

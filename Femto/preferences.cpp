@@ -32,7 +32,7 @@ void Preferences::on_foregroundButton_released()
 
 void Preferences::loadSettings(){
     QSettings settings("ArZero", "Femto");
-    settings.beginGroup("Font");
+    settings.beginGroup("Style");
     color = qvariant_cast<QColor>(settings.value("color"));
     bgcolor = qvariant_cast<QColor>(settings.value("bgcolor"));
     sdcolor = qvariant_cast<QColor>(settings.value("sidecolor"));
@@ -44,7 +44,7 @@ void Preferences::loadSettings(){
 
 void Preferences::saveSettings(){
     QSettings setting("ArZero", "Femto");
-    setting.beginGroup("Font");
+    setting.beginGroup("Style");
     setting.setValue("font", fontchoice);
     setting.setValue("color", color);
     setting.setValue("bgcolor", bgcolor);
@@ -54,19 +54,7 @@ void Preferences::saveSettings(){
     //setting.setValue();
     setting.endGroup();
 }
-/*
-void Femto::loadSettings(){
-    QSettings settings("ArZero", "Femto");
-    settings.beginGroup("Font");
-    QColor color = qvariant_cast<QColor>(settings.value("color"));
-    QColor bgcolor = qvariant_cast<QColor>(settings.value("bgcolor"));
-    QColor linecolor = qvariant_cast<QColor>(settings.value("lncolor"));
-    QColor sidecolor = qvariant_cast<QColor>(settings.value("sidecolor"));
-    QFont font = qvariant_cast<QFont>(settings.value("font"));
-    //ui->textEdit->setFont(font);
-    settings.endGroup();
-}
-*/
+
 void Preferences::on_fontButton_released()
 {
     bool ok;

@@ -26,8 +26,6 @@ public:
 private slots:
     void on_buttonBox_accepted();
 
-    void on_backgroundButton_pressed();
-
     void on_foregroundButton_released();
 
     void on_fontButton_released();
