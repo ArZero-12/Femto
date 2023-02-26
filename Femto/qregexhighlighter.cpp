@@ -108,7 +108,7 @@ QRegexpHighlighter::QRegexpHighlighter(QObject *parent, QString type) : QSyntaxH
 
     // Highlighting constants
     classFormat.setForeground(Qt::red);
-    rule.pattern = QRegularExpression(QStringLiteral("\\b[A-Z0-9_]+\\b"));
+    rule.pattern = QRegularExpression(QStringLiteral("\\b[A-Z0-9_]{3,100}\\b"));
     rule.format = classFormat;
     highlightingRules.append(rule);
 
