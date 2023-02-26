@@ -1,14 +1,14 @@
 #include "femto.h"
 #include "ui_femto.h"
-#include "preferences.h"
 
+#include "preferences.h"
+#include "qregexhighlighter.h"
 Femto::Femto(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Femto)
 {
     ui->setupUi(this);
     this->setCentralWidget(ui->textEdit);
-
     QFontMetrics metrics(ui->textEdit->font());
     highlighter = new QRegexpHighlighter(this, "text");
     highlighter->setDocument(ui->textEdit->document());

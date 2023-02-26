@@ -12,11 +12,10 @@
 #include <QPrintDialog>
 #include <fstream>
 #include <QFileInfo>
-#include "preferences.h"
-#include "qregexhighlighter.h"
 #include <QMimeDatabase>
 #include <QRegularExpression>
 #include <QSettings>
+#include "qregexhighlighter.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Femto; }

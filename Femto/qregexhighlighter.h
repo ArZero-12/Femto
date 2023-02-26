@@ -1,10 +1,12 @@
 #ifndef QREGEXPHIGHLIGHTER_H
 #define QREGEXPHIGHLIGHTER_H
+
 #include <QTextCharFormat>
 #include <QSyntaxHighlighter>
 #include <QRegularExpression>
 #include <QColor>
 #include <QMimeType>
+
 class QRegexpHighlighter : public QSyntaxHighlighter
 {
     Q_OBJECT

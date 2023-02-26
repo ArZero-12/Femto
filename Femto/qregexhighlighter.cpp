@@ -1,5 +1,5 @@
 #include "qregexhighlighter.h"
-#include <QLoggingCategory>
+
 QRegexpHighlighter::QRegexpHighlighter(QObject *parent, QString type) : QSyntaxHighlighter(parent){
     HighlightingRule rule;
 
@@ -8,7 +8,7 @@ QRegexpHighlighter::QRegexpHighlighter(QObject *parent, QString type) : QSyntaxH
     //keywordFormat.setFontWeight(QFont::Bold);
     bool code = false;
 
-    QLoggingCategory::setFilterRules("*.debug=true");
+
     //qDebug(stderr) << "Debugging";
     if (type == "text"){
         return;
