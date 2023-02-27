@@ -1,12 +1,7 @@
 #include "preferences.h"
 #include "ui_preferences.h"
 
-QColor color;
-QColor bgcolor;
-QColor sdcolor;
-QColor sdfcolor;
-QColor lncolor;
-QFont fontchoice;
+
 
 Preferences::Preferences(QWidget *parent) :
     QDialog(parent),
@@ -15,7 +10,8 @@ Preferences::Preferences(QWidget *parent) :
     ui->setupUi(this);
     loadSettings();
     //parent->setStyleSheet("background-color: black;");
-    fontchoice = QFont("Monospace", 10);
+
+    //fontchoice = QFont("Monospace", 10);
 }
 
 Preferences::~Preferences()
@@ -26,7 +22,9 @@ Preferences::~Preferences()
 
 void Preferences::on_foregroundButton_released()
 {
-    color = QColorDialog::getColor();
+    Tempc = QColorDialog::getColor();
+    if (Tempc == nullptr) return;
+    color = Tempc;
     ui->foregroundButton->setStyleSheet("background-color: " + color.name() + ';');
 }
 
@@ -58,7 +56,7 @@ void Preferences::saveSettings(){
 void Preferences::on_fontButton_released()
 {
     bool ok;
-    QFont font = QFontDialog::getFont(&ok, QFont("Monospace", 10), this);
+    QFont font = QFontDialog::getFont(&ok, this);
     if (ok){
         fontchoice = font;
         return;
@@ -73,7 +71,9 @@ void Preferences::on_buttonBox_accepted()
 
 void Preferences::on_sidebarfgButton_released()
 {
-    sdfcolor = QColorDialog::getColor();
+    Tempc = QColorDialog::getColor();
+    if (Tempc == nullptr) return;
+    sdfcolor = Tempc;
     ui->sidebarfgButton->setStyleSheet("background-color: " + sdfcolor.name() + ';');
 }
 
@@ -81,21 +81,28 @@ void Preferences::on_sidebarfgButton_released()
 
 void Preferences::on_sidebarbgButton_released()
 {
-    sdcolor = QColorDialog::getColor();
+    Tempc = QColorDialog::getColor();
+    if (Tempc == nullptr) return;
+    sdcolor = Tempc;
     ui->sidebarbgButton->setStyleSheet("background-color: " + sdcolor.name() + ';');
 }
 
 
 void Preferences::on_clButton_pressed()
 {
-    lncolor = QColorDialog::getColor();
+
+    Tempc = QColorDialog::getColor();
+    if (Tempc == nullptr) return;
+    lncolor = Tempc;
     ui->clButton->setStyleSheet("background-color: " + lncolor.name() + ';');
 }
 
 
 void Preferences::on_backgroundButton_released()
 {
-    bgcolor = QColorDialog::getColor();
+    Tempc = QColorDialog::getColor();
+    if (Tempc == nullptr) return;
+    bgcolor = Tempc;
     ui->backgroundButton->setStyleSheet("background-color: " + bgcolor.name() + ';');
 }
 

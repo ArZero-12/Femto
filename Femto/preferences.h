@@ -17,7 +17,13 @@ class Preferences : public QDialog
 
 public:
     explicit Preferences(QWidget *parent = nullptr);
-
+    QColor Tempc = nullptr;
+    QColor color;
+    QColor bgcolor;
+    QColor sdcolor;
+    QColor sdfcolor;
+    QColor lncolor;
+    QFont fontchoice;
     void loadSettings();
     void saveSettings();
 

@@ -26,6 +26,9 @@ class CodeEditor : public QPlainTextEdit
 
 public:
     CodeEditor(QWidget *parent = nullptr);
+    QColor sdc;
+    QColor lnc;
+    QColor sdfc;
     void changecolors();
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int lineNumberAreaWidth();

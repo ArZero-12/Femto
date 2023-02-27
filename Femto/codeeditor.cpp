@@ -30,9 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // Source code can be found here: https://code.qt.io/cgit/qt/qtbase.git/tree/examples/widgets/widgets/codeeditor?h=5.15
 #include "codeeditor.h"
 
-QColor sdc;
-QColor lnc;
-QColor sdfc;
+
 
 CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 {
