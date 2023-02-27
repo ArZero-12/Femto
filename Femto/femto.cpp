@@ -30,6 +30,7 @@ void Femto::loadSettings(){
     ui->textEdit->setFont(font);
     ui->textEdit->changecolors();
     ui->textEdit->setStyleSheet("background-color: " + bgcolor.name() + "; color: " + color.name() + ";");
+    ui->textEdit->changecolors();
     settings.endGroup();
 }
 
@@ -224,7 +225,6 @@ void Femto::on_actionPreferences_triggered()
 
 void Femto::on_actionFullscreen_triggered()
 {
-
     if (fullScreen){
         this->setWindowState(Qt::WindowFullScreen);
         fullScreen = false;

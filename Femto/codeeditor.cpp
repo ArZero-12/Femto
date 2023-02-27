@@ -142,4 +142,5 @@ void CodeEditor::changecolors(){
     sdfc = qvariant_cast<QColor>(settings.value("sideforecolor", QColor::fromRgb(255, 255, 255)));
     sdc = qvariant_cast<QColor>(settings.value("sidecolor", QColor::fromRgb(120, 0, 255)));
     settings.endGroup();
+    highlightCurrentLine();
 }
