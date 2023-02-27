@@ -43,8 +43,14 @@ void Femto::readFile(QString fileName, int argument){
     delete highlighter;
     QFileInfo check_file(fileName);
     if ((!check_file.exists()) && (argument == 0)){
-        delete highlighter;
         QFile file(fileName);
+        if (!file.open(QIODevice::ReadOnly | QFile::Text)){
+            if (QString::compare(file.errorString(), "No file name specified") == 0){
+                return;
+            }
+            QMessageBox::warning(this, "Warning", "Cannot open file: " + file.errorString());
+            return;
+        }
         currentFile = fileName;
         QTextStream in(&file);
         QString text = in.readAll();
@@ -56,6 +62,9 @@ void Femto::readFile(QString fileName, int argument){
     }
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly | QFile::Text)){
+        if (QString::compare(file.errorString(), "No file name specified") == 0){
+            return;
+        }
         QMessageBox::warning(this, "Warning", "Cannot open file: " + file.errorString());
         return;
     }
@@ -95,6 +104,9 @@ void Femto::on_actionSave_triggered()
 
     QFile file(fileName);
     if (!file.open(QFile::WriteOnly | QFile::Text)){
+        if (QString::compare(file.errorString(), "No file name specified") == 0){
+            return;
+        }
         QMessageBox::warning(this, "Warning", "Cannot save file: " + file.errorString());
         return;
     }
@@ -116,6 +128,9 @@ void Femto::on_actionSave_as_triggered()
     QString fileName = QFileDialog::getSaveFileName(this, "Save as: ");
     QFile file(fileName);
     if (!file.open(QFile::WriteOnly | QFile::Text)){
+        if (QString::compare(file.errorString(), "No file name specified") == 0){
+            return;
+        }
         QMessageBox::warning(this, "Warning", "Cannot save file: " + file.errorString());
         return;
     }
@@ -186,7 +201,7 @@ void Femto::on_actionRedo_triggered()
 
 void Femto::on_textEdit_textChanged()
 {
-    if (windowTitle()[0] == '*'){
+    if (windowTitle().at(0) == '*'){
         return;
     }
     setWindowTitle('*' + windowTitle());
