@@ -142,20 +142,33 @@ void CodeEditor::changecolors(){
     settings.endGroup();
     highlightCurrentLine();
 }
-
+#include <QDebug>
 void CodeEditor::keyPressEvent(QKeyEvent *e){
+    QChar currChar = this->document()->characterAt(this->textCursor().position() - 1);
+    QChar nextChar = this->document()->characterAt(this->textCursor().position());
     switch (e->key()){
+    case Qt::Key_Return: {
+        QPlainTextEdit::keyPressEvent(e);
+        if ((currChar == '{') && (nextChar == '}')){
+            this->insertPlainText("\t\n");
+
+            this->moveCursor(QTextCursor::Up);
+            this->insertPlainText("\t");
+        } else
+        if ((currChar == ':') || (currChar == '{') || (currChar == '\t')) {
+            this->insertPlainText("\t" );
+        }
+        break;
+    }
     case Qt::Key_ParenLeft: {
         QPlainTextEdit::keyPressEvent(e);
         this->insertPlainText(")");
         this->moveCursor(QTextCursor::Left);
-        paren = true;
         break;
     }
     case Qt::Key_ParenRight:{
-        if (paren) {
+        if (nextChar == ')') {
             this->moveCursor(QTextCursor::Right);
-            paren = false;
             break;
         }
         QPlainTextEdit::keyPressEvent(e);
@@ -165,13 +178,11 @@ void CodeEditor::keyPressEvent(QKeyEvent *e){
         QPlainTextEdit::keyPressEvent(e);
         this->insertPlainText("}");
         this->moveCursor(QTextCursor::Left);
-        brace = true;
         break;
     }
     case Qt::Key_BraceRight: {
-        if (brace){
+        if (nextChar == '}'){
             this->moveCursor(QTextCursor::Right);
-            brace = false;
             break;
         }
         QPlainTextEdit::keyPressEvent(e);
@@ -181,13 +192,11 @@ void CodeEditor::keyPressEvent(QKeyEvent *e){
         QPlainTextEdit::keyPressEvent(e);
         this->insertPlainText("]");
         this->moveCursor(QTextCursor::Left);
-        square_bracket = true;
         break;
     }
     case Qt::Key_BracketRight: {
-        if (square_bracket){
+        if (nextChar == ']'){
             this->moveCursor(QTextCursor::Right);
-            square_bracket = false;
             break;
         }
         QPlainTextEdit::keyPressEvent(e);
@@ -212,43 +221,36 @@ void CodeEditor::keyPressEvent(QKeyEvent *e){
     }
     */
     case Qt::Key_QuoteDbl: {
-        if (dquote){
+        if (nextChar == '"'){
             this->moveCursor(QTextCursor::Right);
-            dquote = false;
             break;
         }
         QPlainTextEdit::keyPressEvent(e);
         this->insertPlainText("\"");
         this->moveCursor(QTextCursor::Left);
-        dquote = true;
         break;
     }
     case Qt::Key_Apostrophe: {
-        if (quote){
+        if (nextChar == '\''){
             this->moveCursor(QTextCursor::Right);
-            quote = false;
             break;
         }
         QPlainTextEdit::keyPressEvent(e);
         this->insertPlainText("'");
         this->moveCursor(QTextCursor::Left);
-        quote = true;
         break;
     }
     case Qt::Key_QuoteLeft: {
-        if (tick){
+        if (nextChar == '`'){
             this->moveCursor(QTextCursor::Right);
-            tick = false;
             break;
         }
         QPlainTextEdit::keyPressEvent(e);
         this->insertPlainText("`");
         this->moveCursor(QTextCursor::Left);
-        tick = true;
         break;
     }
     default: {
-        paren = false;
         QPlainTextEdit::keyPressEvent(e);
         break;
     }

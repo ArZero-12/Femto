@@ -146,6 +146,7 @@ QRegexpHighlighter::QRegexpHighlighter(QObject *parent, QString type) : QSyntaxH
     rule.format = multiLineCommentFormat;
     highlightingRules.append(rule);
 
+
     // Highlighting Python single-line comments:
     if (python){
         singleLineCommentFormat.setForeground(Qt::gray);

@@ -32,13 +32,6 @@ public:
     void changecolors();
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int lineNumberAreaWidth();
-    bool paren = false;
-    bool brace = false;
-    bool angle_bracket = false;
-    bool square_bracket = false;
-    bool dquote = false;
-    bool quote = false;
-    bool tick = false;
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
