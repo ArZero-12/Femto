@@ -193,6 +193,7 @@ void CodeEditor::keyPressEvent(QKeyEvent *e){
         QPlainTextEdit::keyPressEvent(e);
         break;
     }
+    /*
     case Qt::Key_Less: {
         QPlainTextEdit::keyPressEvent(e);
         this->insertPlainText(">");
@@ -209,6 +210,7 @@ void CodeEditor::keyPressEvent(QKeyEvent *e){
         QPlainTextEdit::keyPressEvent(e);
         break;
     }
+    */
     case Qt::Key_QuoteDbl: {
         if (dquote){
             this->moveCursor(QTextCursor::Right);

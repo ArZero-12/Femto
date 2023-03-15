@@ -99,7 +99,7 @@ QRegexpHighlighter::QRegexpHighlighter(QObject *parent, QString type) : QSyntaxH
     if (code){
     // Highlighting includes:
     includeFormat.setForeground(Qt::green);
-    rule.pattern = QRegularExpression(QStringLiteral("<.*>"));
+    rule.pattern = QRegularExpression(QStringLiteral("<[a-zA-Z0-9_]{1,100}>"));
     rule.format = includeFormat;
     highlightingRules.append(rule);
 
