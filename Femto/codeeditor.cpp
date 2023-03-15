@@ -142,3 +142,113 @@ void CodeEditor::changecolors(){
     settings.endGroup();
     highlightCurrentLine();
 }
+
+void CodeEditor::keyPressEvent(QKeyEvent *e){
+    switch (e->key()){
+    case Qt::Key_ParenLeft: {
+        QPlainTextEdit::keyPressEvent(e);
+        this->insertPlainText(")");
+        this->moveCursor(QTextCursor::Left);
+        paren = true;
+        break;
+    }
+    case Qt::Key_ParenRight:{
+        if (paren) {
+            this->moveCursor(QTextCursor::Right);
+            paren = false;
+            break;
+        }
+        QPlainTextEdit::keyPressEvent(e);
+        break;
+    }
+    case Qt::Key_BraceLeft: {
+        QPlainTextEdit::keyPressEvent(e);
+        this->insertPlainText("}");
+        this->moveCursor(QTextCursor::Left);
+        brace = true;
+        break;
+    }
+    case Qt::Key_BraceRight: {
+        if (brace){
+            this->moveCursor(QTextCursor::Right);
+            brace = false;
+            break;
+        }
+        QPlainTextEdit::keyPressEvent(e);
+        break;
+    }
+    case Qt::Key_BracketLeft: {
+        QPlainTextEdit::keyPressEvent(e);
+        this->insertPlainText("]");
+        this->moveCursor(QTextCursor::Left);
+        square_bracket = true;
+        break;
+    }
+    case Qt::Key_BracketRight: {
+        if (square_bracket){
+            this->moveCursor(QTextCursor::Right);
+            square_bracket = false;
+            break;
+        }
+        QPlainTextEdit::keyPressEvent(e);
+        break;
+    }
+    case Qt::Key_Less: {
+        QPlainTextEdit::keyPressEvent(e);
+        this->insertPlainText(">");
+        this->moveCursor(QTextCursor::Left);
+        angle_bracket = true;
+        break;
+    }
+    case Qt::Key_Greater: {
+        if (angle_bracket){
+            this->moveCursor(QTextCursor::Right);
+            angle_bracket = false;
+            break;
+        }
+        QPlainTextEdit::keyPressEvent(e);
+        break;
+    }
+    case Qt::Key_QuoteDbl: {
+        if (dquote){
+            this->moveCursor(QTextCursor::Right);
+            dquote = false;
+            break;
+        }
+        QPlainTextEdit::keyPressEvent(e);
+        this->insertPlainText("\"");
+        this->moveCursor(QTextCursor::Left);
+        dquote = true;
+        break;
+    }
+    case Qt::Key_Apostrophe: {
+        if (quote){
+            this->moveCursor(QTextCursor::Right);
+            quote = false;
+            break;
+        }
+        QPlainTextEdit::keyPressEvent(e);
+        this->insertPlainText("'");
+        this->moveCursor(QTextCursor::Left);
+        quote = true;
+        break;
+    }
+    case Qt::Key_QuoteLeft: {
+        if (tick){
+            this->moveCursor(QTextCursor::Right);
+            tick = false;
+            break;
+        }
+        QPlainTextEdit::keyPressEvent(e);
+        this->insertPlainText("`");
+        this->moveCursor(QTextCursor::Left);
+        tick = true;
+        break;
+    }
+    default: {
+        paren = false;
+        QPlainTextEdit::keyPressEvent(e);
+        break;
+    }
+    }
+}

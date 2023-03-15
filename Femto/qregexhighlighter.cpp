@@ -7,7 +7,7 @@ QRegexpHighlighter::QRegexpHighlighter(QObject *parent, QString type) : QSyntaxH
     //functionFormat.setFontItalic(true);
     //keywordFormat.setFontWeight(QFont::Bold);
     bool code = false;
-
+    bool python = false;
 
     //qDebug(stderr) << "Debugging";
     if (type == "text"){
@@ -39,13 +39,10 @@ QRegexpHighlighter::QRegexpHighlighter(QObject *parent, QString type) : QSyntaxH
     // Highlighting Python keywords:
     if ((type.endsWith("python")) || (type.endsWith("python3"))){
     code = true;
+    python = true;
     pythonKeywordFormat.setForeground(Qt::magenta);
 
-    // Highlighting Python single-line comments:
-    singleLineCommentFormat.setForeground(Qt::gray);
-    rule.pattern = QRegularExpression(QStringLiteral("#[^\n]*"));
-    rule.format = singleLineCommentFormat;
-    highlightingRules.append(rule);
+
     const QString pythonKeywordPatterns[] = {
         QStringLiteral("\\bimport\\b"), QStringLiteral("\\bfrom\\b"), QStringLiteral("\\bself\\b"),
         QStringLiteral("\\bdef\\b"), QStringLiteral("\\bis\\b"), QStringLiteral("\\bin\\b"),
@@ -148,6 +145,14 @@ QRegexpHighlighter::QRegexpHighlighter(QObject *parent, QString type) : QSyntaxH
     commentEndExpression = QRegularExpression(QStringLiteral("\\*/"));
     rule.format = multiLineCommentFormat;
     highlightingRules.append(rule);
+
+    // Highlighting Python single-line comments:
+    if (python){
+        singleLineCommentFormat.setForeground(Qt::gray);
+        rule.pattern = QRegularExpression(QStringLiteral("#[^\n]*"));
+        rule.format = singleLineCommentFormat;
+        highlightingRules.append(rule);
+    }
     }
 
 

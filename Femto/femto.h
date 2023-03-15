@@ -15,6 +15,7 @@
 #include <QMimeDatabase>
 #include <QRegularExpression>
 #include <QSettings>
+#include <QShortcut>
 #include "qregexhighlighter.h"
 
 QT_BEGIN_NAMESPACE
@@ -62,12 +63,11 @@ private slots:
 
     //void on_textEdit_currentCharFormatChanged(const QTextCharFormat &format);
 
-
-
     void on_actionPreferences_triggered();
 
     void on_actionFullscreen_triggered();
 
+    void revert();
 private:
     Ui::Femto *ui;
     QString currentFile = "";

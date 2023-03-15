@@ -9,6 +9,9 @@ Femto::Femto(QWidget *parent)
 {
     ui->setupUi(this);
     this->setCentralWidget(ui->textEdit);
+    QShortcut *revert_shortcut = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_W), this);
+    QObject::connect(revert_shortcut, &QShortcut::activated, this, &Femto::revert);
+
     QFontMetrics metrics(ui->textEdit->font());
     highlighter = new QRegexpHighlighter(this, "text");
     highlighter->setDocument(ui->textEdit->document());
@@ -233,3 +236,13 @@ void Femto::on_actionFullscreen_triggered()
     this->setWindowState(Qt::WindowMaximized);
     fullScreen = true;
 }
+
+
+void Femto::revert()
+{
+    //delete ui->textEdit;
+    QTextCursor tmpCursor = ui->textEdit->textCursor();
+    tmpCursor.movePosition(QTextCursor::StartOfLine, QTextCursor::MoveAnchor);
+    ui->textEdit->setTextCursor(tmpCursor);
+}
+

@@ -35,5 +35,5 @@ RESOURCES += \
 
 DISTFILES +=
 
-
+TARGET = femto
 RC_ICONS = icon.ico

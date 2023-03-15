@@ -18,28 +18,7 @@
     <normaloff>:/imgs/icon.ico</normaloff>:/imgs/icon.ico</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
-  </property>
-  <widget class="QWidget" name="centralwidget">
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <widget class="CodeEditor" name="textEdit">
-    <property name="geometry">
-     <rect>
-      <x>13</x>
-      <y>9</y>
-      <width>771</width>
-      <height>551</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Fira Code</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QScrollBar:vertical {
+   <string notr="true">QScrollBar:vertical {
 	border: none;
 	width: 10px;
 }
@@ -67,6 +46,27 @@ QScrollBar::sub-line {
 	border: none;
 	background: none;
 }</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <widget class="CodeEditor" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>13</x>
+      <y>9</y>
+      <width>771</width>
+      <height>551</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Fira Code</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
     </property>
     <property name="lineWrapMode">
      <enum>QPlainTextEdit::NoWrap</enum>

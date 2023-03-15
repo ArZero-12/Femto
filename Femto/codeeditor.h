@@ -32,9 +32,17 @@ public:
     void changecolors();
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int lineNumberAreaWidth();
+    bool paren = false;
+    bool brace = false;
+    bool angle_bracket = false;
+    bool square_bracket = false;
+    bool dquote = false;
+    bool quote = false;
+    bool tick = false;
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
+    virtual void keyPressEvent( QKeyEvent * e);
 
 private slots:
     void updateLineNumberAreaWidth(int newBlockCount);
@@ -61,6 +69,7 @@ public:
     }
 
 protected:
+
     void paintEvent(QPaintEvent *event) override
     {
         codeEditor->lineNumberAreaPaintEvent(event);
