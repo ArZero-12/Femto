@@ -170,7 +170,7 @@ void CodeEditor::keyPressEvent(QKeyEvent *e){
             tabs = match.captured(0);
         }
         this->insertPlainText("\n" + tabs);
-        if ((lastChar == "{" ) || (lastChar == ":")){
+        if ((lastChar == '{' ) || (lastChar == ':')){
             this->insertPlainText("\t\n" + tabs);
             this->moveCursor(QTextCursor::Up, QTextCursor::MoveAnchor);
             this->moveCursor(QTextCursor::Right, QTextCursor::MoveAnchor);
