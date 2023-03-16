@@ -142,22 +142,73 @@ void CodeEditor::changecolors(){
     settings.endGroup();
     highlightCurrentLine();
 }
-#include <QDebug>
+
 void CodeEditor::keyPressEvent(QKeyEvent *e){
     QChar currChar = this->document()->characterAt(this->textCursor().position() - 1);
     QChar nextChar = this->document()->characterAt(this->textCursor().position());
     switch (e->key()){
-    case Qt::Key_Return: {
+    case Qt::Key_Backspace: {
         QPlainTextEdit::keyPressEvent(e);
-        if ((currChar == '{') && (nextChar == '}')){
-            this->insertPlainText("\t\n");
+        if ((currChar == nextChar) && ((currChar == '"') || (currChar == '\'') || (currChar == '`'))){
+            this->textCursor().deleteChar();
+        } else if (((currChar == '(') && (nextChar == ')')) || ((currChar == '{') && (nextChar == '}')) || ((currChar == '[') && (nextChar == ']'))){
+            this->textCursor().deleteChar();
+        }
+        break;
+    }
 
-            this->moveCursor(QTextCursor::Up);
-            this->insertPlainText("\t");
+    case Qt::Key_Return: {
+        QChar lastChar = this->document()->characterAt(this->textCursor().position() - 1);
+        QString tabs = "";
+        QTextCursor curs = this->textCursor();
+        curs.select(QTextCursor::BlockUnderCursor);
+
+        static QRegularExpression rx("\\s+");
+        QRegularExpressionMatch match = rx.match(curs.selectedText());
+
+        if (match.hasMatch()){
+            tabs = match.captured(0);
+        }
+        this->insertPlainText("\n" + tabs);
+        if ((lastChar == "{" ) || (lastChar == ":")){
+            this->insertPlainText("\t\n" + tabs);
+            this->moveCursor(QTextCursor::Up, QTextCursor::MoveAnchor);
+            this->moveCursor(QTextCursor::Right, QTextCursor::MoveAnchor);
+        }
+        /*
+        QPlainTextEdit::keyPressEvent(e);
+
+        int depth = 0;
+        bool nline = false;
+        if ((currChar == '{') && (nextChar == '}')){
+            depth += 1;
+            //this->insertPlainText("\t\n");
+            //this->insertPlainText("\t");
+            //this->moveCursor(QTextCursor::Up);
+            //this->insertPlainText("\t");
+            nline = true;
         } else
         if ((currChar == ':') || (currChar == '{') || (currChar == '\t')) {
-            this->insertPlainText("\t" );
+            depth += 1;
+            //this->insertPlainText("\t" );
         }
+        int depth2 = depth;
+        while (depth > 0){
+            depth -= 1;
+            this->insertPlainText("\t");
+        }
+        if (nline){
+            this->insertPlainText("\n");
+        }
+        while (depth2 > 0){
+            depth2 -= 1;
+            this->insertPlainText("\t");
+        }
+        if (nline){
+
+            this->moveCursor(QTextCursor::Up);
+        }
+        */
         break;
     }
     case Qt::Key_ParenLeft: {

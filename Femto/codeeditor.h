@@ -8,6 +8,7 @@
 #include <QPainter>
 #include <QTextBlock>
 #include <QSettings>
+#include <QRegularExpression>
 
 QT_BEGIN_NAMESPACE
 class QPaintEvent;
