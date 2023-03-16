@@ -9,13 +9,11 @@ Femto::Femto(QWidget *parent)
 {
     ui->setupUi(this);
     this->setCentralWidget(ui->textEdit);
-    QShortcut *revert_shortcut = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_W), this);
+    QShortcut *revert_shortcut = new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_W), this);
     QObject::connect(revert_shortcut, &QShortcut::activated, this, &Femto::revert);
 
-    QFontMetrics metrics(ui->textEdit->font());
     highlighter = new QRegexpHighlighter(this, "text");
     highlighter->setDocument(ui->textEdit->document());
-    ui->textEdit->setTabStopDistance(metrics.horizontalAdvance(' ') * 4);
     loadSettings();
     if (QApplication::arguments().size() > 1) {
         const QString fileName = QApplication::arguments().at(1);
@@ -30,6 +28,8 @@ void Femto::loadSettings(){
     QColor color = qvariant_cast<QColor>(settings.value("color", QColor::fromRgb(255, 255, 255)));
     QColor bgcolor = qvariant_cast<QColor>(settings.value("bgcolor", QColor::fromRgb(14, 12, 19)));
     QFont font = qvariant_cast<QFont>(settings.value("font", QFont(QFont("Monospace", 10))));
+    QFontMetrics metrics(ui->textEdit->font());
+    ui->textEdit->setTabStopDistance(metrics.horizontalAdvance(' ') * 4);
     ui->textEdit->setFont(font);
     ui->textEdit->changecolors();
     ui->textEdit->setStyleSheet("background-color: " + bgcolor.name() + "; color: " + color.name() + ";");
