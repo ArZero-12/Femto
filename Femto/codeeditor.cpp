@@ -169,47 +169,14 @@ void CodeEditor::keyPressEvent(QKeyEvent *e){
         if (match.hasMatch()){
             tabs = match.captured(0);
         }
-        this->insertPlainText("\n" + tabs);
+        QPlainTextEdit::keyPressEvent(e);
+        this->insertPlainText(tabs);
         if ((lastChar == '{' ) || (lastChar == ':')){
             this->insertPlainText("\t\n" + tabs);
             this->moveCursor(QTextCursor::Up, QTextCursor::MoveAnchor);
             this->moveCursor(QTextCursor::Right, QTextCursor::MoveAnchor);
         }
-        /*
-        QPlainTextEdit::keyPressEvent(e);
-
-        int depth = 0;
-        bool nline = false;
-        if ((currChar == '{') && (nextChar == '}')){
-            depth += 1;
-            //this->insertPlainText("\t\n");
-            //this->insertPlainText("\t");
-            //this->moveCursor(QTextCursor::Up);
-            //this->insertPlainText("\t");
-            nline = true;
-        } else
-        if ((currChar == ':') || (currChar == '{') || (currChar == '\t')) {
-            depth += 1;
-            //this->insertPlainText("\t" );
-        }
-        int depth2 = depth;
-        while (depth > 0){
-            depth -= 1;
-            this->insertPlainText("\t");
-        }
-        if (nline){
-            this->insertPlainText("\n");
-        }
-        while (depth2 > 0){
-            depth2 -= 1;
-            this->insertPlainText("\t");
-        }
-        if (nline){
-
-            this->moveCursor(QTextCursor::Up);
-        }
-        */
-        break;
+        
     }
     case Qt::Key_ParenLeft: {
         QPlainTextEdit::keyPressEvent(e);
