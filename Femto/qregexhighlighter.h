@@ -26,8 +26,6 @@ private:
 
     QRegularExpression commentStartExpression;
     QRegularExpression commentEndExpression;
-    QRegularExpression quotationStartExpression;
-    QRegularExpression quotationEndExpression;
 
     QTextCharFormat keywordFormat;
     QTextCharFormat pythonKeywordFormat;
