@@ -262,6 +262,7 @@ void CodeEditor::keyPressEvent(QKeyEvent *e){
         QPlainTextEdit::keyPressEvent(e);
         break;
     }
+
     default: {
         QPlainTextEdit::keyPressEvent(e);
         break;

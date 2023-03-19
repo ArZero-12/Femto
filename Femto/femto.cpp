@@ -44,18 +44,17 @@ Femto::~Femto()
 
 void Femto::readFile(QString fileName, int argument){
     QMimeType type = getMimeType(fileName);
-    delete highlighter;
     QFileInfo check_file(fileName);
-    if ((!check_file.exists()) && (argument == 0)){
+    if (!check_file.exists()){
         QFile file(fileName);
-        if (!file.open(QIODevice::ReadOnly | QFile::Text)){
+        if ((!file.open(QIODevice::ReadOnly | QFile::Text)) && (argument == 0)){
             if (QString::compare(file.errorString(), "No file name specified") == 0){
                 return;
             }
             QMessageBox::warning(this, "Warning", "Cannot open file: " + file.errorString());
             return;
         }
-        currentFile = fileName;
+        delete highlighter;
         QTextStream in(&file);
         QString text = in.readAll();
         ui->textEdit->setPlainText(text);
@@ -72,7 +71,7 @@ void Femto::readFile(QString fileName, int argument){
         QMessageBox::warning(this, "Warning", "Cannot open file: " + file.errorString());
         return;
     }
-
+    delete highlighter;
     currentFile = fileName;
     QTextStream in(&file);
     QString text = in.readAll();
@@ -95,6 +94,7 @@ void Femto::on_actionOpen_triggered()
 {
     QString fileName = QFileDialog::getOpenFileName(this, "Select file: ");
     readFile(fileName, 0);
+    currentFile = fileName;
     setWindowTitle(fileName);
 }
 
