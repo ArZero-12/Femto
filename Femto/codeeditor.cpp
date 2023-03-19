@@ -163,7 +163,7 @@ void CodeEditor::keyPressEvent(QKeyEvent *e){
         QTextCursor curs = this->textCursor();
         curs.select(QTextCursor::BlockUnderCursor);
 
-        static QRegularExpression rx("\\s+");
+        static QRegularExpression rx("(<=\2029)(\\s+)");
         QRegularExpressionMatch match = rx.match(curs.selectedText());
 
         if (match.hasMatch()){
