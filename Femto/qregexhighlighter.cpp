@@ -13,6 +13,7 @@ QRegexpHighlighter::QRegexpHighlighter(QObject *parent, QString type) : QSyntaxH
     if (type == "text"){
         return;
     }
+
     // Highlighting C/C++ keywords:
     if ((type.endsWith("csrc")) || (type.endsWith("c++src"))){
     code = true;
@@ -99,7 +100,7 @@ QRegexpHighlighter::QRegexpHighlighter(QObject *parent, QString type) : QSyntaxH
     if (code){
     // Highlighting includes:
     includeFormat.setForeground(Qt::green);
-    rule.pattern = QRegularExpression(QStringLiteral("<[a-zA-Z0-9_]{1,100}>"));
+    rule.pattern = QRegularExpression(QStringLiteral("<[a-zA-Z0-9_\\.]{1,100}>"));
     rule.format = includeFormat;
     highlightingRules.append(rule);
 
@@ -117,13 +118,15 @@ QRegexpHighlighter::QRegexpHighlighter(QObject *parent, QString type) : QSyntaxH
 
     // Highlighting double quotes:
     quotationFormat.setForeground(QColor::fromRgb(255, 153, 51));
-    rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
+    //rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
+    rule.pattern =  QRegularExpression (R"**((?<!\\)([\"'])(.*?)(?<!\\)\1)**");
+    //rule.pattern = QRegularExpression(R"**((?<!\\)([\"'])(.+?)(?<!\\)\1)**",QRegularExpression::DotMatchesEverythingOption | QRegularExpression::MultilineOption);
     rule.format = quotationFormat;
     highlightingRules.append(rule);
 
     // Highlighting single quotes:
     singleQuotationFormat.setForeground(QColor::fromRgb(255, 153, 51));
-    rule.pattern = QRegularExpression(QStringLiteral("\'.*\'"));
+    rule.pattern = QRegularExpression (R"**((?<!\\)([\''])(.*?)(?<!\\)\1)**");
     rule.format = singleQuotationFormat;
     highlightingRules.append(rule);
 

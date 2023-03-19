@@ -11,9 +11,9 @@ Femto::Femto(QWidget *parent)
     this->setCentralWidget(ui->textEdit);
     QShortcut *revert_shortcut = new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_W), this);
     QObject::connect(revert_shortcut, &QShortcut::activated, this, &Femto::revert);
-
     highlighter = new QRegexpHighlighter(this, "text");
     highlighter->setDocument(ui->textEdit->document());
+
     loadSettings();
     if (QApplication::arguments().size() > 1) {
         const QString fileName = QApplication::arguments().at(1);

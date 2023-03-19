@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>659</width>
+    <height>403</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -54,10 +54,10 @@ QScrollBar::sub-line {
    <widget class="CodeEditor" name="textEdit">
     <property name="geometry">
      <rect>
-      <x>13</x>
+      <x>23</x>
       <y>9</y>
-      <width>771</width>
-      <height>551</height>
+      <width>591</width>
+      <height>351</height>
      </rect>
     </property>
     <property name="font">
@@ -78,7 +78,7 @@ QScrollBar::sub-line {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>659</width>
      <height>21</height>
     </rect>
    </property>

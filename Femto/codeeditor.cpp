@@ -171,12 +171,14 @@ void CodeEditor::keyPressEvent(QKeyEvent *e){
         }
         QPlainTextEdit::keyPressEvent(e);
         this->insertPlainText(tabs);
-        if ((lastChar == '{' ) || (lastChar == ':')){
-            this->insertPlainText("\t\n" + tabs);
+        if ((lastChar == "{" ) || (lastChar == ":")){
+            this->insertPlainText("\t");
+            QPlainTextEdit::keyPressEvent(e);
+            this->insertPlainText(tabs);
             this->moveCursor(QTextCursor::Up, QTextCursor::MoveAnchor);
             this->moveCursor(QTextCursor::Right, QTextCursor::MoveAnchor);
         }
-        
+        break;
     }
     case Qt::Key_ParenLeft: {
         QPlainTextEdit::keyPressEvent(e);

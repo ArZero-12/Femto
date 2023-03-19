@@ -24,6 +24,7 @@ public:
     QColor sdfcolor;
     QColor lncolor;
     QFont fontchoice;
+
     void loadSettings();
     void saveSettings();
 
