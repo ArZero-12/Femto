@@ -222,24 +222,6 @@ void CodeEditor::keyPressEvent(QKeyEvent *e){
         QPlainTextEdit::keyPressEvent(e);
         break;
     }
-    /*
-    case Qt::Key_Less: {
-        QPlainTextEdit::keyPressEvent(e);
-        this->insertPlainText(">");
-        this->moveCursor(QTextCursor::Left);
-        angle_bracket = true;
-        break;
-    }
-    case Qt::Key_Greater: {
-        if (angle_bracket){
-            this->moveCursor(QTextCursor::Right);
-            angle_bracket = false;
-            break;
-        }
-        QPlainTextEdit::keyPressEvent(e);
-        break;
-    }
-    */
     case Qt::Key_QuoteDbl: {
         if (nextChar == '"'){
             this->moveCursor(QTextCursor::Right);
@@ -269,6 +251,15 @@ void CodeEditor::keyPressEvent(QKeyEvent *e){
         this->insertPlainText("`");
         this->moveCursor(QTextCursor::Left);
         break;
+    }
+    case Qt::Key_Asterisk: {
+        if (currChar == '/'){
+            this->insertPlainText("**/");
+            this->moveCursor(QTextCursor::Left);
+            this->moveCursor(QTextCursor::Left);
+            break;
+        }
+        QPlainTextEdit::keyPressEvent(e);
     }
     default: {
         QPlainTextEdit::keyPressEvent(e);
