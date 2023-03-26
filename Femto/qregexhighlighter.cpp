@@ -98,22 +98,11 @@ QRegexpHighlighter::QRegexpHighlighter(QObject *parent, QString type) : QSyntaxH
         }}
 
     if (code){
-    // Highlighting includes:
-    includeFormat.setForeground(Qt::green);
-    rule.pattern = QRegularExpression(QStringLiteral("<[a-zA-Z0-9_\\.]{1,100}>"));
-    rule.format = includeFormat;
-    highlightingRules.append(rule);
 
     // Highlighting constants
     classFormat.setForeground(Qt::red);
     rule.pattern = QRegularExpression(QStringLiteral("\\b[A-Z0-9_]{3,100}\\b"));
     rule.format = classFormat;
-    highlightingRules.append(rule);
-
-    // Highlighting numbers:
-    numberFormat.setForeground(QColor::fromRgb(250, 150, 200));
-    rule.pattern = QRegularExpression(QStringLiteral("\\b\\d*\\.?\\d*"));
-    rule.format = numberFormat;
     highlightingRules.append(rule);
 
     // Highlighting double quotes:
@@ -129,6 +118,19 @@ QRegexpHighlighter::QRegexpHighlighter(QObject *parent, QString type) : QSyntaxH
     rule.pattern = QRegularExpression (R"**((?<!\\)([\''])(.*?)(?<!\\)\1)**");
     rule.format = singleQuotationFormat;
     highlightingRules.append(rule);
+
+    // Highlighting numbers:
+    numberFormat.setForeground(QColor::fromRgb(250, 150, 200));
+    rule.pattern = QRegularExpression(QStringLiteral("\\b\\d*\\.?\\d*"));
+    rule.format = numberFormat;
+    highlightingRules.append(rule);
+
+    // Highlighting includes:
+    includeFormat.setForeground(Qt::green);
+    rule.pattern = QRegularExpression(QStringLiteral("<[a-zA-Z0-9_\\.]{1,100}>"));
+    rule.format = includeFormat;
+    highlightingRules.append(rule);
+
 
     // Highlighting functions:
     functionFormat.setForeground(QColor::fromRgb(250, 0, 127));
@@ -171,7 +173,7 @@ void QRegexpHighlighter::highlightBlock(const QString &text){
             QRegularExpressionMatch match = matchIterator.next();
             setFormat(match.capturedStart(), match.capturedLength(), rule.format);
         }
-
+        setCurrentBlockState(0);
         int startIndex = 0;
         if (previousBlockState() != 1)
             startIndex = text.indexOf(commentStartExpression);
