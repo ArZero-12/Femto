@@ -105,19 +105,7 @@ QRegexpHighlighter::QRegexpHighlighter(QObject *parent, QString type) : QSyntaxH
     rule.format = classFormat;
     highlightingRules.append(rule);
 
-    // Highlighting double quotes:
-    quotationFormat.setForeground(QColor::fromRgb(255, 153, 51));
-    //rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
-    rule.pattern =  QRegularExpression (R"**((?<!\\)([\"'])(.*?)(?<!\\)\1)**");
-    //rule.pattern = QRegularExpression(R"**((?<!\\)([\"'])(.+?)(?<!\\)\1)**",QRegularExpression::DotMatchesEverythingOption | QRegularExpression::MultilineOption);
-    rule.format = quotationFormat;
-    highlightingRules.append(rule);
 
-    // Highlighting single quotes:
-    singleQuotationFormat.setForeground(QColor::fromRgb(255, 153, 51));
-    rule.pattern = QRegularExpression (R"**((?<!\\)([\''])(.*?)(?<!\\)\1)**");
-    rule.format = singleQuotationFormat;
-    highlightingRules.append(rule);
 
     // Highlighting numbers:
     numberFormat.setForeground(QColor::fromRgb(250, 150, 200));
@@ -138,6 +126,19 @@ QRegexpHighlighter::QRegexpHighlighter(QObject *parent, QString type) : QSyntaxH
     rule.format = functionFormat;
     highlightingRules.append(rule);
 
+    // Highlighting double quotes:
+    quotationFormat.setForeground(QColor::fromRgb(255, 153, 51));
+    //rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
+    rule.pattern =  QRegularExpression (R"**(([\"'])(.*?)\1)**");
+    //rule.pattern = QRegularExpression(R"**((?<!\\)([\"'])(.+?)(?<!\\)\1)**",QRegularExpression::DotMatchesEverythingOption | QRegularExpression::MultilineOption);
+    rule.format = quotationFormat;
+    highlightingRules.append(rule);
+
+    // Highlighting single quotes:
+    singleQuotationFormat.setForeground(QColor::fromRgb(255, 153, 51));
+    rule.pattern = QRegularExpression (R"**((?<!\\)([\''])(.*?)(?<!\\)\1)**");
+    rule.format = singleQuotationFormat;
+    highlightingRules.append(rule);
     // Highlighting single-line comments:
     singleLineCommentFormat.setForeground(Qt::gray);
     rule.pattern = QRegularExpression(QStringLiteral("//[^\n]*"));
@@ -191,4 +192,5 @@ void QRegexpHighlighter::highlightBlock(const QString &text){
             startIndex = text.indexOf(commentStartExpression, startIndex + commentLength);
         }
     }
+
 }

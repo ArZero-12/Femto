@@ -9,6 +9,7 @@
 #include <QTextBlock>
 #include <QSettings>
 #include <QRegularExpression>
+#include <QShortcut>
 
 QT_BEGIN_NAMESPACE
 class QPaintEvent;
@@ -43,8 +44,10 @@ private slots:
     void highlightCurrentLine();
     void updateLineNumberArea(const QRect &rect, int dy);
 
+
 private:
     QWidget *lineNumberArea;
+
 
 };
 

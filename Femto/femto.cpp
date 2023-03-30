@@ -58,9 +58,11 @@ void Femto::readFile(QString fileName, int argument){
         QTextStream in(&file);
         QString text = in.readAll();
         ui->textEdit->setPlainText(text);
+
         highlighter = new QRegexpHighlighter(this, type.name());
         highlighter->setDocument(ui->textEdit->document());
         file.close();
+        currentFile = fileName;
         return;
     }
     QFile file(fileName);
@@ -72,7 +74,7 @@ void Femto::readFile(QString fileName, int argument){
         return;
     }
     delete highlighter;
-    currentFile = fileName;
+
     QTextStream in(&file);
     QString text = in.readAll();
     ui->textEdit->setPlainText(text);
@@ -80,8 +82,9 @@ void Femto::readFile(QString fileName, int argument){
 
     highlighter = new QRegexpHighlighter(this, type.name());
     highlighter->setDocument(ui->textEdit->document());
-
+    currentFile = fileName;
     file.close();
+
 }
 void Femto::on_actionNew_triggered()
 {
@@ -121,8 +124,11 @@ void Femto::on_actionSave_triggered()
     QString text = ui->textEdit->toPlainText();
     out << text;
     file.close();
-
-    setWindowTitle(fileName);
+    setWindowTitle(currentFile);
+    QMimeType type = getMimeType(fileName);
+    delete highlighter;
+    highlighter = new QRegexpHighlighter(this, type.name());
+    highlighter->setDocument(ui->textEdit->document());
 }
 
 
