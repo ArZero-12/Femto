@@ -172,7 +172,7 @@ void CodeEditor::keyPressEvent(QKeyEvent *e){
         }
         QPlainTextEdit::keyPressEvent(e);
         this->insertPlainText(tabs);
-        if ((lastChar == "{" ) || (lastChar == ":")){
+        if ((lastChar == '{' ) || (lastChar == ':')){
             this->insertPlainText("\t");
             QPlainTextEdit::keyPressEvent(e);
             this->insertPlainText(tabs);
