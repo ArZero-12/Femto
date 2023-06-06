@@ -185,7 +185,11 @@ void Femto::on_actionSave_triggered()
         QMessageBox::warning(this, "Warning", "Cannot save file: " + file.errorString());
         return;
     }
+/////////////////////////////////////////////////////============================
 
+    QFileInfo check_file(fileName);
+    QString tab = check_file.fileName();
+    ui->tabWidget->setTabText(ui->tabWidget->currentIndex(), tab);
     code->fileName = fileName;
     QTextStream out(&file);
     QString text = code->toPlainText();
