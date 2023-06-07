@@ -28,18 +28,18 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 // Source code can be found here: https://code.qt.io/cgit/qt/qtbase.git/tree/examples/widgets/widgets/codeeditor?h=5.15
-#include "codeeditor.h"
+#include "Headers/codeeditor.h"
 
 
 
 CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 {
+    //fileName = "Femto";
     lineNumberArea = new LineNumberArea(this);
-    changecolors();
+    loadSettings();
     connect(this, &CodeEditor::blockCountChanged, this, &CodeEditor::updateLineNumberAreaWidth);
     connect(this, &CodeEditor::updateRequest, this, &CodeEditor::updateLineNumberArea);
     connect(this, &CodeEditor::cursorPositionChanged, this, &CodeEditor::highlightCurrentLine);
-
 
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
@@ -132,18 +132,40 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
 }
 
 void CodeEditor::changecolors(){
-    //lnc = line;
-    //sdc = side;
-    //sdfc = sidefg;
+//    lnc = line;
+//    sdc = side;
+//    sdfc = sidefg;
     QSettings settings("ArZero", "Femto");
     settings.beginGroup("Style");
     lnc = qvariant_cast<QColor>(settings.value("lncolor", QColor::fromRgb(139, 0, 139)));
     sdfc = qvariant_cast<QColor>(settings.value("sideforecolor", QColor::fromRgb(255, 255, 255)));
     sdc = qvariant_cast<QColor>(settings.value("sidecolor", QColor::fromRgb(120, 0, 255)));
+
+    settings.endGroup();
+
+    highlightCurrentLine();
+}
+void CodeEditor::loadSettings(){
+    QSettings settings("ArZero", "Femto");
+    settings.beginGroup("Style");
+    color = qvariant_cast<QColor>(settings.value("color", QColor::fromRgb(255, 255, 255)));
+    bgcolor = qvariant_cast<QColor>(settings.value("bgcolor", QColor::fromRgb(14, 12, 19)));
+    textfont = qvariant_cast<QFont>(settings.value("font", QFont(QFont("Monospace", 10))));
+
+    lnc = qvariant_cast<QColor>(settings.value("lncolor", QColor::fromRgb(139, 0, 139)));
+    sdfc = qvariant_cast<QColor>(settings.value("sideforecolor", QColor::fromRgb(255, 255, 255)));
+    sdc = qvariant_cast<QColor>(settings.value("sidecolor", QColor::fromRgb(120, 0, 255)));
+
+    this->setFont(textfont);
+    QFontMetrics metrics(this->font());
+    this->setTabStopDistance(metrics.horizontalAdvance(' ') * 4);
+    //ui->tabWidget->widget(0)->setTabStopDistance(metrics.horizontalAdvance(' ') * 4);
+    //->changecolors();
+    this->setStyleSheet("background-color: " + bgcolor.name() + "; color: " + color.name() + ";");
+//    ui->textEdit->changecolors();
     settings.endGroup();
     highlightCurrentLine();
 }
-
 void CodeEditor::keyPressEvent(QKeyEvent *e){
     QChar currChar = this->document()->characterAt(this->textCursor().position() - 1);
     QChar nextChar = this->document()->characterAt(this->textCursor().position());

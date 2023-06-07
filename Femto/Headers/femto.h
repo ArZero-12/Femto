@@ -16,8 +16,9 @@
 #include <QRegularExpression>
 #include <QSettings>
 #include <QShortcut>
+#include <QDir>
 #include "qregexhighlighter.h"
-
+#include <Headers/codeeditor.h>
 QT_BEGIN_NAMESPACE
 namespace Ui { class Femto; }
 QT_END_NAMESPACE
@@ -32,6 +33,8 @@ public:
     void readFile(QString fileName, int argument);
 private:
     //Preferences preferences;
+    //CodeEditor* code = NULL;
+    CodeEditor* getCurrentFile();
     QRegexpHighlighter* highlighter;
     QMimeDatabase db;
     QMimeType getMimeType(QString fileName);
@@ -59,7 +62,7 @@ private slots:
 
     void on_actionRedo_triggered();
 
-    void on_textEdit_textChanged();
+//    void on_textEdit_textChanged();
 
     //void on_textEdit_currentCharFormatChanged(const QTextCharFormat &format);
 
@@ -67,10 +70,18 @@ private slots:
 
     void on_actionFullscreen_triggered();
 
-    void revert();
+//    void revert();
+    void on_actionNew_Tab_triggered();
+
+    void on_tabWidget_tabCloseRequested(int index);
+
+    //void on_tabWidget_tabBarClicked(int index);
+
+    void on_tabWidget_currentChanged();
+
 private:
     Ui::Femto *ui;
-    QString currentFile = "";
+//    QString currentFile = "";
     bool fullScreen = true;
 };
 #endif // FEMTO_H

@@ -1,4 +1,4 @@
-#include "qregexhighlighter.h"
+#include "Headers/qregexhighlighter.h"
 
 QRegexpHighlighter::QRegexpHighlighter(QObject *parent, QString type) : QSyntaxHighlighter(parent){
     HighlightingRule rule;
@@ -65,7 +65,7 @@ QRegexpHighlighter::QRegexpHighlighter(QObject *parent, QString type) : QSyntaxH
     }} else
 
     // Highlighting Javascript keywords:
-    if (type.endsWith("javascript")){
+    if (type.endsWith("javascript") or type.endsWith("json")){
         code = true;
         javascriptKeywordFormat.setForeground(Qt::yellow);
         const QString javascriptKeywordPatterns[] {

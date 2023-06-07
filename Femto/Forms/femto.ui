@@ -14,7 +14,7 @@
    <string>Femto</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="Resources.qrc">
+   <iconset resource="../Resources/Resources.qrc">
     <normaloff>:/imgs/icon.ico</normaloff>:/imgs/icon.ico</iconset>
   </property>
   <property name="styleSheet">
@@ -22,7 +22,19 @@
 	border: none;
 	width: 10px;
 }
-
+QTabBar {
+	border: none;
+}
+QTabBar::tab {
+	color: white;
+	background-color: purple;
+}
+QTabBar::tab:selected {
+	background-color: hotpink;
+}
+QTabWidget:pane {
+	border: 1px solid gray;
+}
 QScrollBar:horizontal {
 	border: none;
 	height: 10px;
@@ -47,29 +59,39 @@ QScrollBar::sub-line {
 	background: none;
 }</string>
   </property>
+  <property name="documentMode">
+   <bool>false</bool>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
     <string notr="true"/>
    </property>
-   <widget class="CodeEditor" name="textEdit">
+   <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>23</x>
-      <y>9</y>
-      <width>591</width>
-      <height>351</height>
+      <x>130</x>
+      <y>80</y>
+      <width>251</width>
+      <height>141</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <family>Fira Code</family>
-     </font>
+    <property name="currentIndex">
+     <number>-1</number>
     </property>
-    <property name="styleSheet">
-     <string notr="true"/>
+    <property name="elideMode">
+     <enum>Qt::ElideNone</enum>
     </property>
-    <property name="lineWrapMode">
-     <enum>QPlainTextEdit::NoWrap</enum>
+    <property name="documentMode">
+     <bool>false</bool>
+    </property>
+    <property name="tabsClosable">
+     <bool>true</bool>
+    </property>
+    <property name="movable">
+     <bool>true</bool>
+    </property>
+    <property name="tabBarAutoHide">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
@@ -79,7 +101,7 @@ QScrollBar::sub-line {
      <x>0</x>
      <y>0</y>
      <width>659</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
    <property name="palette">
@@ -974,6 +996,7 @@ QScrollBar::sub-line {
      <string>File</string>
     </property>
     <addaction name="actionNew"/>
+    <addaction name="actionNew_Tab"/>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
     <addaction name="actionSave_as"/>
@@ -1965,6 +1988,9 @@ QScrollBar::sub-line {
    <property name="text">
     <string>Copy</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
   </action>
   <action name="actionPaste">
    <property name="icon">
@@ -1973,6 +1999,9 @@ QScrollBar::sub-line {
    </property>
    <property name="text">
     <string>Paste</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
    </property>
   </action>
   <action name="actionCut">
@@ -1983,6 +2012,9 @@ QScrollBar::sub-line {
    <property name="text">
     <string>Cut</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
   </action>
   <action name="actionUndo">
    <property name="icon">
@@ -1992,6 +2024,9 @@ QScrollBar::sub-line {
    <property name="text">
     <string>Undo</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
   </action>
   <action name="actionRedo">
    <property name="icon">
@@ -2000,6 +2035,9 @@ QScrollBar::sub-line {
    </property>
    <property name="text">
     <string>Redo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+Z</string>
    </property>
   </action>
   <action name="actionPreferences">
@@ -2015,16 +2053,21 @@ QScrollBar::sub-line {
     <string>Ctrl+F</string>
    </property>
   </action>
+  <action name="actionNew_Tab">
+   <property name="icon">
+    <iconset theme="document-new">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>New Tab</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+N</string>
+   </property>
+  </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>CodeEditor</class>
-   <extends>QPlainTextEdit</extends>
-   <header>codeeditor.h</header>
-  </customwidget>
- </customwidgets>
  <resources>
-  <include location="Resources.qrc"/>
+  <include location="../Resources/Resources.qrc"/>
  </resources>
  <connections/>
 </ui>

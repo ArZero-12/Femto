@@ -27,11 +27,16 @@ class CodeEditor : public QPlainTextEdit
     Q_OBJECT
 
 public:
+    QString fileName = NULL;
     CodeEditor(QWidget *parent = nullptr);
     QColor sdc;
     QColor lnc;
     QColor sdfc;
+    QColor color;
+    QColor bgcolor;
+    QFont textfont;
     void changecolors();
+    void loadSettings();
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int lineNumberAreaWidth();
 
