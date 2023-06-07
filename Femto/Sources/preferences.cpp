@@ -12,7 +12,7 @@ Preferences::Preferences(QWidget *parent) :
     //parent->setStyleSheet("background-color: black;");
 //    parent->parent()->setStyleSheet("background-color: black;");
 
-    fontchoice = QFont("Monospace", 10);
+    //fontchoice = QFont("Monospace", 10);
 }
 
 Preferences::~Preferences()
