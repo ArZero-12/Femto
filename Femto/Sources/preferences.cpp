@@ -9,7 +9,8 @@ Preferences::Preferences(QWidget *parent) :
 {
     ui->setupUi(this);
     loadSettings();
-    parent->setStyleSheet("background-color: black;");
+    //parent->setStyleSheet("background-color: black;");
+//    parent->parent()->setStyleSheet("background-color: black;");
 
     fontchoice = QFont("Monospace", 10);
 }
