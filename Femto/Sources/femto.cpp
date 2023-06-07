@@ -388,6 +388,10 @@ void Femto::on_tabWidget_currentChanged()
 {
     CodeEditor* code = getCurrentFile();
 //    currentFile = code->fileName;
+    if (code->fileName.isNull()) {
+        setWindowTitle("Femto");
+        return;
+    }
     setWindowTitle(code->fileName);
 }
 
