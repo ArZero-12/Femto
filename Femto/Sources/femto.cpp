@@ -22,31 +22,62 @@ Femto::Femto(QWidget *parent)
 //        const QString fileName = QApplication::arguments().at(i);
 //        readFile(fileName, 1);
 //    }
-
+    setWindowTitle("Femto");
     // Hihglighting
-    CodeEditor* code = getCurrentFile();
-    highlighter = new QRegexpHighlighter(ui->tabWidget, "text");
-    highlighter->setDocument(code->document());
 
-    if (QApplication::arguments().size() > 1) {
-
+    //highlighter = new QRegexpHighlighter(ui->tabWidget, "text");
+    //highlighter->setDocument(code->document());
+    if (QApplication::arguments().size() > 1){
         QString fileName;
-        QMimeType type = getMimeType(fileName);
-        //code = getCurrentFile();
+        CodeEditor* code = getCurrentFile();
+        fileName = QApplication::arguments().at(1);
         code->fileName = fileName;
-        for (int i = 1; i < QApplication::arguments().size(); i++){
+        QMimeType type = getMimeType(fileName);
+        highlighter = new QRegexpHighlighter(ui->tabWidget, type.name());
+        highlighter->setDocument(code->document());
+        setWindowTitle(fileName);
+        ui->tabWidget->setTabText(0, fileName);
+        for (int i = 2; i < QApplication::arguments().size(); i++){
             fileName = QApplication::arguments().at(i);
-
-            ui->tabWidget->insertTab(ui->tabWidget->currentIndex() + 1, new CodeEditor(), "Femto");
+            ui->tabWidget->insertTab(ui->tabWidget->currentIndex() + 1, new CodeEditor(), fileName);
             ui->tabWidget->setCurrentIndex(ui->tabWidget->currentIndex() + 1);
+            type = getMimeType(fileName);
             code = getCurrentFile();
+            code->fileName = fileName;
             highlighter = new QRegexpHighlighter(ui->tabWidget, type.name());
             highlighter->setDocument(code->document());
-            code->fileName = fileName;
+
         }
         setWindowTitle(fileName);
-        // "filename" now contains path and name of the file to open.
     }
+//    if (QApplication::arguments().size() > 1) {
+//        CodeEditor* code = getCurrentFile();
+
+//        QString fileName;
+//        //code = getCurrentFile();
+//        for (int i = 1; i < QApplication::arguments().size(); i++){
+//            fileName = QApplication::arguments().at(i);
+//            code = getCurrentFile();
+////            code->fileName = fileName;
+//            QMimeType type = getMimeType(fileName);
+//            highlighter = new QRegexpHighlighter(ui->tabWidget, type.name());
+////            if (i == 1){
+////                ui->tabWidget->setTabText(0, fileName);
+
+////                highlighter->setDocument(code->document());
+////                code->fileName = fileName;
+////                continue;
+////            }
+//            //highlighter = new QRegexpHighlighter(ui->tabWidget, type.name());
+//            highlighter->setDocument(code->document());
+//            //code->fileName = fileName;
+//            setWindowTitle(fileName);
+//            code->fileName = fileName;
+//            ui->tabWidget->insertTab(ui->tabWidget->currentIndex() + 1, new CodeEditor(), fileName);
+//            //ui->tabWidget->setCurrentIndex(ui->tabWidget->currentIndex() + 1);
+//        }
+//        // "filename" now contains path and name of the file to open.
+//    }
 }
 
 void Femto::loadSettings(){
