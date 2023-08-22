@@ -268,7 +268,7 @@ void Femto::on_actionPrint_triggered()
     QPrinter printer;
     printer.setPrinterName("Printer Name");
     QPrintDialog pDialog(&printer, this);
-    if (!pDialog.exec() == QDialog::Rejected){
+    if (pDialog.exec() != QDialog::Rejected){
         QMessageBox::warning(this, "Warning", "Cannot access printer!");
         return;
     }
