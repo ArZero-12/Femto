@@ -42,7 +42,7 @@ public:
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
-    virtual void keyPressEvent( QKeyEvent * e);
+    virtual void keyPressEvent( QKeyEvent * e) override;
 
 private slots:
     void updateLineNumberAreaWidth(int newBlockCount);
