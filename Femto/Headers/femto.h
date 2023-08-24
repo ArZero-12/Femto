@@ -12,6 +12,7 @@
 #include <QPrintDialog>
 #include <fstream>
 #include <QFileInfo>
+#include <QMimeData>
 #include <QMimeDatabase>
 #include <QRegularExpression>
 #include <QSettings>
@@ -39,6 +40,12 @@ private:
     QMimeDatabase db;
     QMimeType getMimeType(QString fileName);
     void loadSettings();
+protected:
+    void dragEnterEvent(QDragEnterEvent *event) override;
+    //void dragMoveEvent(QDragMoveEvent *event) override;
+    //void dragLeaveEvent(QDragLeaveEvent *event) override;
+    void dropEvent(QDropEvent *event) override;
+
 private slots:
     void on_actionNew_triggered();
 

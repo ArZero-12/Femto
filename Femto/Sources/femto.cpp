@@ -3,6 +3,7 @@
 #include "Headers/codeeditor.h"
 #include "Headers/preferences.h"
 #include "Headers/qregexhighlighter.h"
+
 Femto::Femto(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Femto)
@@ -11,7 +12,7 @@ Femto::Femto(QWidget *parent)
     this->setCentralWidget(ui->tabWidget);
 //    QShortcut *revert_shortcut = new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_W), this);
 //    QObject::connect(revert_shortcut, &QShortcut::activated, this, &Femto::revert);
-
+    setAcceptDrops(true);
     // Setup
     //CodeEditor* currentTab = NULL;
     ui->tabWidget->insertTab(ui->tabWidget->count(), new CodeEditor(), "Femto");
@@ -78,6 +79,34 @@ Femto::Femto(QWidget *parent)
 //        }
 //        // "filename" now contains path and name of the file to open.
 //    }
+}
+
+void Femto::dragEnterEvent(QDragEnterEvent *event){
+    //setBackgroundRole(QPallete::Highlight);
+    //if (event->mimeData()->hasText()){
+    event->acceptProposedAction();
+
+
+}
+/*
+void Femto::dragLeaveEvent(QDropEvent *event){
+
+}
+
+void Femto::dragMoveEvent(QDropEvent *event){
+
+}
+*/
+void Femto::dropEvent(QDropEvent *event){
+    //QMessageBox::warning(this, "Warning", "#");
+    foreach(const QUrl & url, event->mimeData()->urls())
+    {
+        QString fname = url.toLocalFile();
+        //QFileInfo info(fname);
+        readFile(fname, 1);
+
+    }
+
 }
 
 void Femto::loadSettings(){
