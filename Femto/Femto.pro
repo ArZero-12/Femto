@@ -37,3 +37,4 @@ DISTFILES +=
 
 TARGET = femto
 RC_ICONS = icon.ico
+macx:ICON = Resources/icon.icns

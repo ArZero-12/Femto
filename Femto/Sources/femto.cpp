@@ -349,7 +349,7 @@ void Femto::on_actionFullscreen_triggered()
         fullScreen = false;
         return;
     }
-    this->setWindowState(Qt::WindowMaximized);
+    this->setWindowState(Qt::WindowNoState);
     fullScreen = true;
 }
 
